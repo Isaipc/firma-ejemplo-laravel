@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\DefaultController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,5 +15,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('signature.index');
 });
+
+Route::get('signature', 'DefaultController@index')->name('signature.index');
+Route::post('signature', 'DefaultController@upload')->name('signature.upload');
