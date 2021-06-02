@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title> Laravel Signature Pad Example - codechief.org </title>
+    <title> Firma digital - Ejemplo </title>
     <link rel="stylesheet" type="text/css"
         href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.css">
 
