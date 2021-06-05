@@ -1,77 +1,30 @@
-<!DOCTYPE html>
-<html>
+@extends('app')
 
-<head>
-    <title> Firma digital - Ejemplo </title>
-    <link rel="stylesheet" type="text/css"
-        href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.css">
-
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <link type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/south-street/jquery-ui.css"
-        rel="stylesheet">
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-    <script type="text/javascript" src="http://keith-wood.name/js/jquery.signature.js"></script>
-
-    <link rel="stylesheet" type="text/css" href="http://keith-wood.name/css/jquery.signature.css">
-
-    <style>
-        .kbw-signature {
-            width: 100%;
-            height: 200px;
-        }
-
-        #sig canvas {
-            width: 100% !important;
-            height: auto;
-        }
-    </style>
-
-</head>
-
-<body class="bg-dark">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6 offset-md-3 mt-5">
-                <div class="card">
-                    <div class="card-header">
-                        <h4>Firma ejemplo</h4>
-                    </div>
-                    <div class="card-body">
-                        @if ($message = Session::get('success'))
-                        <div class="alert alert-success  alert-dismissible">
-                            <button type="button" class="close" data-dismiss="alert">×</button>
-                            <strong>{{ $message }}</strong>
-                        </div>
-                        @endif
-                        <form method="POST" action="{{ route('signature.upload') }}">
-                            @csrf
-                            <div class="col-md-12">
-                                <div class="row">
-                                    <div class="col">
-                                        <button id="clear" class="btn btn-danger btn-sm">Limpiar</button>
-                                    </div>
-                                </div>
-                                <div id="sig"></div>
-                                <textarea id="signature64" name="signed" style="display: none"></textarea>
-                            </div>
-                            <br />
-                            <button class="btn btn-success">Guardar</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
+@section('content')
+<form method="POST" action="{{ route('signature.upload') }}">
+    @csrf
+    <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+        <div class="btn-group mr-4" role="group" aria-label="First group">
+            <button id='clear-btn' type="button" class="btn btn-danger">Limpiar</button>
+            <button id="btn-2" type="button" class="btn btn-primary">2</button>
+            <button type="button" class="btn btn-primary">3</button>
+            <button type="button" class="btn btn-primary">4</button>
+        </div>
+        <div class="btn-group mr-2" role="group" aria-label="Second group">
+            <button type="button" class="btn btn-success">PNG</button>
+            <button type="button" class="btn btn-success">JPG</button>
+            <button type="button" class="btn btn-success">SVG</button>
+        </div>
+        <div class="btn-group" role="group" aria-label="Third group">
+            <button type="button" class="btn btn-secondary">8</button>
         </div>
     </div>
 
-    <script type="text/javascript">
-        var sig = $('#sig').signature({syncField: '#signature64', syncFormat: 'PNG'});
-    $('#clear').click(function(e) {
-        e.preventDefault();
-        sig.signature('clear');
-        $("#signature64").val('');
-    });
-    </script>
-
-</body>
-
-</html>
+    <div class="wrapper">
+        <canvas id="signature-pad" class="signature-pad border border-primary"></canvas>
+    </div>
+    <div class="row mt-2">
+        <button class="btn btn-success col-md-4">Guardar</button>
+    </div>
+</form>
+@endsection
